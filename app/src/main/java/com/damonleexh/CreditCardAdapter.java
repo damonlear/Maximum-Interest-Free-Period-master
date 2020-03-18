@@ -4,59 +4,61 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class CreditCardAdapter extends BaseAdapter {
+public class CreditCardAdapter extends RecyclerView.Adapter<BankViewHolder> {
     private Context mContext;
     private List<CreditCard> mList;
+    private LayoutInflater mInflater;
+    private RequestOptions options = new RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .placeholder(R.drawable.loading_spinner)
+            .centerInside()
+            .error(R.drawable.loading_error);
 
     public CreditCardAdapter(Context mContext, List<CreditCard> mList) {
         this.mContext = mContext;
         this.mList = mList;
+        this.mInflater = LayoutInflater.from(mContext);
+    }
+
+
+    @NonNull
+    @Override
+    public BankViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View convertView = mInflater.inflate(R.layout.item_credit_card, null);
+        return new BankViewHolder(convertView);
     }
 
     @Override
-    public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        BankViewHolder holder = null;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_credit_card, null);
-            holder = new BankViewHolder();
-            holder.ivIcon = convertView.findViewById(R.id.iv_icon);
-            holder.tvName = convertView.findViewById(R.id.tv_name);
-            holder.tvStatement = convertView.findViewById(R.id.tv_statement);
-            holder.tvPayment = convertView.findViewById(R.id.tv_payment);
-            holder.tvMax = convertView.findViewById(R.id.tv_max);
-            convertView.setTag(holder);
-        } else {
-            holder = (BankViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(@NonNull BankViewHolder holder, int position) {
         try {
-            holder.ivIcon.setImageResource(R.mipmap.ic_launcher);
-            holder.tvName.setText(mList.get(position).getName());
-            holder.tvStatement.setText(mList.get(position).getStatementDate());
-            holder.tvPayment.setText(mList.get(position).getPaymentDate());
-            holder.tvMax.setText(String.valueOf(mList.get(position).getGracePeriod()));
+            CreditCard creditCard = mList.get(position);
+            holder.ivIcon.setImageResource(R.drawable.loading_spinner);
+            holder.tvName.setText(creditCard.getName());
+            holder.tvStatement.setText(creditCard.getStatementDate());
+            holder.tvPayment.setText(creditCard.getPaymentDate());
+            holder.tvMax.setText(String.valueOf(creditCard.getGracePeriod()));
+
+            Glide.with(mContext)
+                    .load("https://apimg.alipay.com/combo.png?d=cashier&t=CCB")
+                    .apply(options)
+                    .into(holder.ivIcon);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return convertView;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mList.size();
     }
 }

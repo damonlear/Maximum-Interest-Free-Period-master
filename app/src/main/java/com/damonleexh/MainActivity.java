@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.damonleexh.util.CalculateManager;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<CreditCard> mList = new ArrayList<>();
     private CreditCardAdapter creditCardAdapter;
-    private ListView listview;
+    private RecyclerView mRecyclerView;
 
     //查询信用卡账单
     @Override
@@ -32,9 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listview = findViewById(R.id.listview);
+        mRecyclerView = findViewById(R.id.listview);
         creditCardAdapter = new CreditCardAdapter(this, mList);
-        listview.setAdapter(creditCardAdapter);
+        mRecyclerView.setAdapter(creditCardAdapter);
+
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
             creditCard.setGracePeriod(maxFreeTime);
             mList.add(creditCard);
-            Snackbar.make(listview, "添加成功", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Snackbar.make(mRecyclerView, "添加成功", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
