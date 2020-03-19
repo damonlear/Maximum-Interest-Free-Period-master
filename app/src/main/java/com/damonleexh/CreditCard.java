@@ -26,7 +26,8 @@ public class CreditCard implements Serializable {
     //免息周期
     private int gracePeriod = -1;
 
-    public CreditCard(String name, String statementDate, String paymentDate) {
+    public CreditCard(String bank, String name, String statementDate, String paymentDate) {
+        this.bank = bank;
         this.name = name;
         this.statementDate = statementDate;
         this.paymentDate = paymentDate;
