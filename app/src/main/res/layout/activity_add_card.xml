@@ -20,15 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="✳添加"
-            android:textColor="#0000ff"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_step_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="银行卡"
-            android:textColor="#0000ff"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="22sp" />
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.damonleexh;
+package com.damonleexh.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
+import com.damonleexh.R;
 import com.damonleexh.base.SpacesItemDecoration;
+import com.damonleexh.ui.add.AddCardActivity;
 import com.damonleexh.util.CalculateManager;
 import com.damonleexh.util.FileUtil;
-import com.damonleexh.widget.CreditCardInputDialog;
-import com.damonleexh.widget.ICredieCardListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

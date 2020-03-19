@@ -1,4 +1,4 @@
-package com.damonleexh;
+package com.damonleexh.ui.main;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ public class CreditCard implements Serializable {
     private String bank;
     //中文名称
     private String name;
+    //银行卡号
+    private String number;
     //图标链接
     private String icon;
     //交易日
@@ -47,6 +49,14 @@ public class CreditCard implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getIcon() {
@@ -129,6 +139,7 @@ public class CreditCard implements Serializable {
         return getGracePeriod() == that.getGracePeriod() &&
                 getBank().equals(that.getBank()) &&
                 getName().equals(that.getName()) &&
+                getNumber().equals(that.getNumber()) &&
                 getIcon().equals(that.getIcon()) &&
                 getTransactionDate().equals(that.getTransactionDate()) &&
                 getStatementDate().equals(that.getStatementDate()) &&
@@ -143,6 +154,7 @@ public class CreditCard implements Serializable {
     public int hashCode() {
         return getBank().hashCode() +
                 getName().hashCode() +
+                getNumber().hashCode() +
                 getIcon().hashCode() +
                 getTransactionDate().hashCode() +
                 getStatementDate().hashCode() +
@@ -160,6 +172,7 @@ public class CreditCard implements Serializable {
                 "bank='" + bank + '\'' +
                 ", name='" + name + '\'' +
                 ", icon='" + icon + '\'' +
+                ", number='" + number + '\'' +
                 ", statementDate='" + statementDate + '\'' +
                 ", paymentDate='" + paymentDate + '\'' +
                 ", previousStatementDate='" + previousStatementDate + '\'' +
