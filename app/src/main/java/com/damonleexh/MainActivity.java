@@ -1,8 +1,8 @@
 package com.damonleexh;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,15 +50,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreditCardInputDialog dialog = new CreditCardInputDialog();
-                dialog.setOnInputListener(new ICredieCardListener() {
-                    @Override
-                    public void input(String name, String statement, String payment) {
-                        addCreditCard(name, statement, payment);
-                        refrash();
-                    }
-                });
-                dialog.show(MainActivity.this.getFragmentManager(), "ADD");
+                startActivity(new Intent(MainActivity.this, AddCardActivity.class));
             }
         });
 
@@ -73,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean addCreditCard(String bankName, String statement, String paymeny) {
         try {
-            CreditCard creditCard = new CreditCard("" , bankName, statement, paymeny);
+            CreditCard creditCard = new CreditCard("", bankName, statement, paymeny);
             int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
             creditCard.setGracePeriod(maxFreeTime);
             mList.add(creditCard);
@@ -94,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
         } else {
             try {
                 mList.clear();
-                CreditCard creditCard = new CreditCard("ALIPAY" , "支付宝", "01", "10");
+                CreditCard creditCard = new CreditCard("ALIPAY", "支付宝", "01", "10");
                 int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
                 creditCard.setGracePeriod(maxFreeTime);
                 mList.add(creditCard);
-                creditCard = new CreditCard("CITIC","中信银行", "02", "21");
+                creditCard = new CreditCard("CITIC", "中信银行", "02", "21");
                 maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
                 creditCard.setGracePeriod(maxFreeTime);
                 mList.add(creditCard);
-                creditCard = new CreditCard("CMB","招商银行", "25", "13");
+                creditCard = new CreditCard("CMB", "招商银行", "25", "13");
                 maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
                 creditCard.setGracePeriod(maxFreeTime);
                 mList.add(creditCard);
-                creditCard = new CreditCard("SPABANK","平安银行", "20", "08");
+                creditCard = new CreditCard("SPABANK", "平安银行", "20", "08");
                 maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
                 creditCard.setGracePeriod(maxFreeTime);
                 mList.add(creditCard);
-                creditCard = new CreditCard("SPDB","上海浦东发展银行", "13", "02");
+                creditCard = new CreditCard("SPDB", "上海浦东发展银行", "13", "02");
                 maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
                 creditCard.setGracePeriod(maxFreeTime);
                 mList.add(creditCard);
