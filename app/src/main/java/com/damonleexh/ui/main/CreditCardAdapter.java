@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.damonleexh.R;
+import com.damonleexh.bean.CreditCard;
 import com.github.florent37.glidepalette.GlidePalette;
 
 import java.util.List;

@@ -33,7 +33,7 @@ public class AddCardActivity extends AppCompatActivity {
         tvStepTitle = findViewById(R.id.tv_step_title);
         viewPager2 = findViewById(R.id.view_pager2);
 
-        mFragments.add(new BankSelectFragment());
+        mFragments.add(new BankNameFragment());
         mFragments.add(new BankNumberFragment());
         mFragments.add(new BankPaymentFragment());
         mFragments.add(new BankStatementFragment());

@@ -1,12 +1,8 @@
-package com.damonleexh.ui.main;
+package com.damonleexh.bean;
 
 import java.io.Serializable;
 
-public class CreditCard implements Serializable {
-    //英文缩写
-    private String bank;
-    //中文名称
-    private String name;
+public class CreditCard extends Bank implements Serializable {
     //银行卡号
     private String number;
     //图标链接

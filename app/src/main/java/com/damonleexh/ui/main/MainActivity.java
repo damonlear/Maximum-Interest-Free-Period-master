@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.damonleexh.R;
 import com.damonleexh.base.SpacesItemDecoration;
+import com.damonleexh.bean.CreditCard;
 import com.damonleexh.ui.add.AddCardActivity;
 import com.damonleexh.util.CalculateManager;
 import com.damonleexh.util.FileUtil;

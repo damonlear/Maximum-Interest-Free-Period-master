@@ -5,8 +5,14 @@ import android.widget.TextView;
 
 import com.damonleexh.R;
 import com.damonleexh.base.LazyFragment;
+import com.damonleexh.bean.Bank;
+import com.damonleexh.bean.CreditCard;
+import com.damonleexh.util.BankJsonPaser;
 
-public class BankSelectFragment extends LazyFragment {
+import java.io.IOException;
+import java.util.List;
+
+public class BankNameFragment extends LazyFragment {
     TextView textView;
 
     @Override
@@ -24,5 +30,12 @@ public class BankSelectFragment extends LazyFragment {
     protected void initData() {
         super.initData();
         textView.setText("当前时间：" + System.currentTimeMillis());
+
+        try {
+            List<Bank> banks = BankJsonPaser.paser(getActivity());
+            textView.setText(banks.get(0).getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
