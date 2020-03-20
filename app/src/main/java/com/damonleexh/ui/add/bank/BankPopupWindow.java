@@ -16,16 +16,6 @@ import com.damonleexh.bean.BankModel;
 
 import java.util.List;
 
-/**
- * <pre>
- *     author : xiaweizi
- *     class  : com.xiaweizi.bankpickerview.BankPopupWindow
- *     e-mail : 1012126908@qq.com
- *     time   : 2018/01/18
- *     desc   :
- * </pre>
- */
-
 public class BankPopupWindow implements View.OnKeyListener {
 
     private Context mContext;

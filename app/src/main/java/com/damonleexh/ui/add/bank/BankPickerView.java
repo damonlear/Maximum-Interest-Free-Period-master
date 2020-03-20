@@ -21,18 +21,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.damonleexh.R;
 import com.damonleexh.bean.BankModel;
+import com.damonleexh.url.BaseUrl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <pre>
- *     author : xiaweizi
- *     class  : com.xiaweizi.bankpickerview.BankPickerView
- *     e-mail : 1012126908@qq.com
- *     time   : 2018/01/14
- *     desc   : 银行选择 view
- * </pre>
+ * desc   : 银行选择 view
  */
 
 public class BankPickerView extends ScrollView {
@@ -175,14 +170,14 @@ public class BankPickerView extends ScrollView {
         TextView name = view.findViewById(R.id.tv_bank_name);
         TextView desc = view.findViewById(R.id.tv_bank_description);
         if (item != null) {
-            Glide.with(getContext()).load("").into(logo);
+            Glide.with(getContext()).load(BaseUrl.getBankIconUrl(item.getBank())).into(logo);
             name.setText(item.getName());
             desc.setText(item.getBank());
         }
         if (0 == itemHeight) {
             itemHeight = getViewMeasuredHeight(view);
             Log.d(TAG, "itemHeight: " + itemHeight);
-            views.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight * displayItemCount));
+            views.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight * displayItemCount));
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) this.getLayoutParams();
             this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, itemHeight * displayItemCount));
         }
@@ -361,8 +356,8 @@ public class BankPickerView extends ScrollView {
     }
 
     private int getViewMeasuredHeight(View view) {
-        int width = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+        int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, View.MeasureSpec.AT_MOST);
         view.measure(width, expandSpec);
         return view.getMeasuredHeight();
     }
