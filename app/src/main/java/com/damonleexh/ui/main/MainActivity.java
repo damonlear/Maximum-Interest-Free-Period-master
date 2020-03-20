@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
+import com.damonleexh.Code;
 import com.damonleexh.R;
 import com.damonleexh.base.SpacesItemDecoration;
 import com.damonleexh.bean.CreditCard;
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddCardActivity.class));
+                Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                startActivityForResult(intent, Code.REQUESTCODE_PICKER_CARD);
             }
         });
 
@@ -64,9 +67,25 @@ public class MainActivity extends AppCompatActivity {
         }.start();
     }
 
-    private boolean addCreditCard(String bankName, String statement, String paymeny) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == Code.REQUESTCODE_PICKER_CARD) {
+                if (resultCode == Code.RESULTCODE_PICKER_CARD) {
+                    CreditCard creditCard = (CreditCard) data.getSerializableExtra("creditCard");
+                    boolean b = addCreditCard(creditCard);
+                    if (b){
+                        refrash();
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean addCreditCard(CreditCard model) {
         try {
-            CreditCard creditCard = new CreditCard("", bankName, statement, paymeny);
+            CreditCard creditCard = new CreditCard(model.getBank(), model.getName(), model.getStatementDate(), model.getPaymentDate());
             int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
             creditCard.setGracePeriod(maxFreeTime);
             mList.add(creditCard);

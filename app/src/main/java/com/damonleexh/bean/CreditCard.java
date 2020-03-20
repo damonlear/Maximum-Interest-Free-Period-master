@@ -24,6 +24,8 @@ public class CreditCard extends BankModel implements Serializable {
     //免息周期
     private int gracePeriod = -1;
 
+    public CreditCard(){}
+
     public CreditCard(String bank, String name, String statementDate, String paymentDate) {
         this.bank = bank;
         this.name = name;

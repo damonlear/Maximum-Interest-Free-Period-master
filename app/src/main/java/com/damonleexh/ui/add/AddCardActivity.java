@@ -1,11 +1,11 @@
 package com.damonleexh.ui.add;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -16,8 +16,11 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.damonleexh.Code;
 import com.damonleexh.R;
 import com.damonleexh.base.ViewPagerAdapter;
+import com.damonleexh.bean.CreditCard;
+import com.damonleexh.url.BaseUrl;
 import com.github.florent37.glidepalette.GlidePalette;
 
 import java.util.ArrayList;
@@ -32,7 +35,8 @@ public class AddCardActivity extends AppCompatActivity {
     private List<Fragment> mFragments = new ArrayList<>();
     private TextView tvPayment;
     private TextView tvStatement;
-
+    //临时信用卡对象
+    private CreditCard creditCard = new CreditCard();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +82,7 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (viewPager2.getCurrentItem() == titleArrays.length - 1) {
-
+                    go2Mainactivity(creditCard);
                 } else {
                     setPager(viewPager2.getCurrentItem() + 1);
                 }
@@ -91,32 +95,16 @@ public class AddCardActivity extends AppCompatActivity {
         viewPager2.setCurrentItem(position);
     }
 
-    public void setCreditCardBank(String name) {
+    public void setCreditCardBank(String bank, String name) {
+        creditCard.setBank(bank);
+        creditCard.setName(name);
+
         TextView tvName = findViewById(R.id.tv_name);
         tvName.setText(name);
-    }
 
-    public void setCreditCardNumber(String number) {
-        TextView tvNumber = findViewById(R.id.tv_number);
-        if (TextUtils.isEmpty(number)) {
-            tvNumber.setText("**** **** **** ****");
-        } else {
-            tvNumber.setText(number);
-        }
-    }
-
-    public void setCreditCardPayment(int payment) {
-        tvPayment.setText(String.valueOf(payment));
-    }
-
-    public void setCreditCardStatement(int statement) {
-        tvStatement.setText(String.valueOf(statement));
-    }
-
-    public void setCreditCardBackground(String url) {
         CardView cardView = findViewById(R.id.card_view);
         ImageView ivIcon = findViewById(R.id.iv_icon);
-
+        String url = BaseUrl.getBankIconUrl(bank);
         RequestOptions options = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(R.drawable.loading_spinner)
@@ -131,5 +119,32 @@ public class AddCardActivity extends AppCompatActivity {
                         .crossfade(true)
                 )
                 .into(ivIcon);
+    }
+
+    public void setCreditCardNumber(String number) {
+        creditCard.setNumber(number);
+        TextView tvNumber = findViewById(R.id.tv_number);
+        if (TextUtils.isEmpty(number)) {
+            tvNumber.setText("**** **** **** ****");
+        } else {
+            tvNumber.setText(number);
+        }
+    }
+
+    public void setCreditCardPayment(int payment) {
+        creditCard.setPaymentDate(String.valueOf(payment));
+        tvPayment.setText(String.valueOf(payment));
+    }
+
+    public void setCreditCardStatement(int statement) {
+        creditCard.setStatementDate(String.valueOf(statement));
+        tvStatement.setText(String.valueOf(statement));
+    }
+
+    public void go2Mainactivity(CreditCard creditCard) {
+        Intent intent = new Intent();
+        intent.putExtra("creditCard", creditCard);
+        setResult(Code.RESULTCODE_PICKER_CARD, intent);
+        finish();
     }
 }

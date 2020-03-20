@@ -8,7 +8,6 @@ import com.damonleexh.R;
 import com.damonleexh.base.LazyFragment;
 import com.damonleexh.bean.BankModel;
 import com.damonleexh.ui.add.bank.BankPopupWindow;
-import com.damonleexh.url.BaseUrl;
 import com.damonleexh.util.BankJsonPaser;
 
 import java.io.IOException;
@@ -66,7 +65,6 @@ public class BankPickerFragment extends LazyFragment {
         tvBank.setText(model.getBank());
         tvName.setText(model.getName());
 
-        ((AddCardActivity) getActivity()).setCreditCardBank(model.getName());
-        ((AddCardActivity) getActivity()).setCreditCardBackground(BaseUrl.getBankIconUrl(model.getBank()));
+        ((AddCardActivity) getActivity()).setCreditCardBank(model.getBank(), model.getName());
     }
 }
