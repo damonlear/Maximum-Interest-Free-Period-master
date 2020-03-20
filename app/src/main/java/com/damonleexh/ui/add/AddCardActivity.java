@@ -30,6 +30,9 @@ public class AddCardActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private String[] titleArrays = {"银行", "银行卡号", "账单日", "还款日"};
     private List<Fragment> mFragments = new ArrayList<>();
+    private TextView tvPayment;
+    private TextView tvStatement;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,10 @@ public class AddCardActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         tvStepTitle = findViewById(R.id.tv_step_title);
         viewPager2 = findViewById(R.id.view_pager2);
+        tvPayment = findViewById(R.id.tv_payment);
+        tvStatement = findViewById(R.id.tv_statement);
+        findViewById(R.id.rl_max).setVisibility(View.GONE);
+
 
         mFragments.add(new BankPickerFragment());
         mFragments.add(new BankNumberFragment());
@@ -71,7 +78,7 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (viewPager2.getCurrentItem() == titleArrays.length - 1) {
-                    Toast.makeText(AddCardActivity.this, "FINAL", Toast.LENGTH_SHORT).show();
+
                 } else {
                     setPager(viewPager2.getCurrentItem() + 1);
                 }
@@ -98,14 +105,12 @@ public class AddCardActivity extends AppCompatActivity {
         }
     }
 
-    public void setCreditCardPayment(String payment) {
-        TextView tvPayment = findViewById(R.id.tv_payment);
-        tvPayment.setText(payment);
+    public void setCreditCardPayment(int payment) {
+        tvPayment.setText(String.valueOf(payment));
     }
 
-    public void setCreditCardStatement(String statement) {
-        TextView tvStatement = findViewById(R.id.tv_statement);
-        tvStatement.setText(statement);
+    public void setCreditCardStatement(int statement) {
+        tvStatement.setText(String.valueOf(statement));
     }
 
     public void setCreditCardBackground(String url) {

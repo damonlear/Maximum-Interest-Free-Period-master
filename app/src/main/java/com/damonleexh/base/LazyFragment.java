@@ -38,6 +38,7 @@ public abstract class LazyFragment extends Fragment {
             initEvent();
             isFirstLoad = false;
         }
+        refreshData();
     }
 
     /**
@@ -67,6 +68,13 @@ public abstract class LazyFragment extends Fragment {
      * 初始化事件
      */
     protected void initEvent() {
+
+    }
+
+    /**
+     * 加载数据
+     */
+    protected void refreshData() {
 
     }
 }

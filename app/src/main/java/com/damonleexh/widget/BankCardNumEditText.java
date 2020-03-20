@@ -5,7 +5,6 @@ import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 public class BankCardNumEditText extends androidx.appcompat.widget.AppCompatEditText {
 

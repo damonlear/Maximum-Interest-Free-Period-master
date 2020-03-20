@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Maximum-Interest-Free-Period</string>
+
+    <string name="pick_bank">请选择银行</string>
+    <string name="pick_bank_t">请选择银行：</string>
+    <string name="pick_number">请输入银行卡号</string>
+    <string name="pick_number_t">请输入银行卡号：</string>
+    <string name="pick_payment">请选择账单日</string>
+    <string name="pick_payment_t">请选择账单日：</string>
+    <string name="pick_statement">请选择还款日</string>
+    <string name="pick_statement_t">请选择还款日：</string>
+    <string name="payment">账单日</string>
+    <string name="payment_t">账单日：</string>
+    <string name="statement">还款日</string>
+    <string name="statement_t">还款日：</string>
+
 </resources>
