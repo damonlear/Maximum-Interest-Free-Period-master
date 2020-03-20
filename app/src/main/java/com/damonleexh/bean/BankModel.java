@@ -1,6 +1,8 @@
 package com.damonleexh.bean;
 
-public class Bank {
+import java.io.Serializable;
+
+public class BankModel implements Serializable {
     //英文缩写
     protected String bank;
     //中文名称

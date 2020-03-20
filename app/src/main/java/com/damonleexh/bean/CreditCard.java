@@ -2,7 +2,7 @@ package com.damonleexh.bean;
 
 import java.io.Serializable;
 
-public class CreditCard extends Bank implements Serializable {
+public class CreditCard extends BankModel implements Serializable {
     //银行卡号
     private String number;
     //图标链接
