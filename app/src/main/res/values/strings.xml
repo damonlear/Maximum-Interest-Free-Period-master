@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Maximum-Interest-Free-Period</string>
+    <string name="app_name">免息日</string>
 
     <string name="pick_bank">请选择银行</string>
     <string name="pick_bank_t">请选择银行：</string>
