@@ -7,19 +7,18 @@ import android.widget.TextView;
 import com.damonleexh.R;
 import com.damonleexh.base.LazyFragment;
 import com.damonleexh.bean.BankModel;
-import com.damonleexh.ui.add.bank.BankPickerView;
 import com.damonleexh.ui.add.bank.BankPopupWindow;
+import com.damonleexh.url.BaseUrl;
 import com.damonleexh.util.BankJsonPaser;
 
 import java.io.IOException;
 import java.util.List;
 
-public class BankNameFragment extends LazyFragment {
+public class BankPickerFragment extends LazyFragment {
+    List<BankModel> mBankModels;
     private TextView tvBank;
     private TextView tvName;
     private RelativeLayout rlBankPicker;
-
-    List<BankModel> mBankModels;
 
     @Override
     protected int getContentViewId() {
@@ -52,8 +51,7 @@ public class BankNameFragment extends LazyFragment {
             @Override
             public void onBankSelect(BankModel model) {
                 if (model == null) return;
-                tvBank.setText(model.getBank());
-                tvName.setText(model.getName());
+                setPickCard(model);
             }
         });
         rlBankPicker.setOnClickListener(new View.OnClickListener() {
@@ -62,5 +60,13 @@ public class BankNameFragment extends LazyFragment {
                 popupWindow.show();
             }
         });
+    }
+
+    private void setPickCard(BankModel model) {
+        tvBank.setText(model.getBank());
+        tvName.setText(model.getName());
+
+        ((AddCardActivity) getActivity()).setCreditCardBank(model.getName());
+        ((AddCardActivity) getActivity()).setCreditCardBackground(BaseUrl.getBankIconUrl(model.getBank()));
     }
 }
