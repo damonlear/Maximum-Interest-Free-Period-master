@@ -33,3 +33,10 @@
 
     https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo=%E9%93%B6%E8%A1%8C%E5%8D%A1%E5%8D%A1%E5%8F%B7&cardBinCheck=true
     https://apimg.alipay.com/combo.png?d=cashier&t=CCB
+
+## 界面
+#### 主界面
+![image](./img/main_page.png)
+
+#### 添加卡片界面
+![image](./img/picker_page.png)
