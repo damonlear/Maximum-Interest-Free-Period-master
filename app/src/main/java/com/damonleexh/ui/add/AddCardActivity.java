@@ -1,16 +1,20 @@
 package com.damonleexh.ui.add;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.palette.graphics.Palette;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +25,7 @@ import com.damonleexh.R;
 import com.damonleexh.base.ViewPagerAdapter;
 import com.damonleexh.bean.CreditCard;
 import com.damonleexh.url.BaseUrl;
+import com.github.florent37.glidepalette.BitmapPalette;
 import com.github.florent37.glidepalette.GlidePalette;
 
 import java.util.ArrayList;

@@ -18,9 +18,11 @@
     <string name="interest_free_period_t">免息期：</string>
     <string name="max_interest_free_period">最长免息期</string>
     <string name="max_interest_free_period_t">最长免息期：</string>
+    <string name="about">关于</string>
 
     <string name="activity_main">全部银行卡界面</string>
     <string name="activity_add">添加银行卡界面</string>
     <string name="activity_video">视频界面</string>
+
 
 </resources>

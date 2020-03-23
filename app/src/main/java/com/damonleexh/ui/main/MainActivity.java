@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -91,21 +90,28 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_statement_date:
                 Intent intent_statement_date = new Intent(this, VideoActivity.class);
-                intent_statement_date.putExtra("uriString" , VideoActivity.statement_date);
+                intent_statement_date.putExtra("uriString", VideoActivity.statement_date);
                 startActivity(intent_statement_date);
                 break;
             case R.id.menu_interest_free_period:
                 Intent intent_interest_free_period = new Intent(this, VideoActivity.class);
-                intent_interest_free_period.putExtra("uriString" , VideoActivity.interest_free_period);
+                intent_interest_free_period.putExtra("uriString", VideoActivity.interest_free_period);
                 startActivity(intent_interest_free_period);
                 break;
-            case R.id.about:
+            case R.id.menu_max_interest_free_period:
                 new AlertDialog.Builder(this)
-                        .setMessage("最大免息日")
+                        .setMessage("最大免息期 = 下月还款日 - 账单日次日")
                         .setPositiveButton("确定", null)
                         .setNegativeButton("取消", null)
                         .create().show();
-                Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_about:
+                String message = "开发者：damon_lee@aliyun.com\n" + "项目地址：https://github.com/damonlear/Maximum-Interest-Free-Period-master\n";
+                new AlertDialog.Builder(this)
+                        .setMessage(message)
+                        .setPositiveButton("确定", null)
+                        .setNegativeButton("取消", null)
+                        .create().show();
                 break;
             default:
                 break;

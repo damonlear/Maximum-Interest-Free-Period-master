@@ -8,6 +8,9 @@
         android:id="@+id/menu_interest_free_period"
         android:title="@string/interest_free_period" />
     <item
-        android:id="@+id/about"
-        android:title="ABOUT" />
+        android:id="@+id/menu_max_interest_free_period"
+        android:title="@string/max_interest_free_period" />
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/about" />
 </menu>
