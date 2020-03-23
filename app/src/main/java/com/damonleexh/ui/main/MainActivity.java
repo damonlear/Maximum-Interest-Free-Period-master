@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         .create().show();
                 break;
             case R.id.menu_about:
-                String message = "开发者：damon_lee@aliyun.com\n" + "项目地址：https://github.com/damonlear/Maximum-Interest-Free-Period-master\n";
+                String message = "开发者：damon_lee@aliyun.com\n" + "项目地址：https://github.com/damonlear\n";
                 new AlertDialog.Builder(this)
                         .setMessage(message)
                         .setPositiveButton("确定", null)
@@ -158,26 +157,26 @@ public class MainActivity extends AppCompatActivity {
         } else {
             try {
                 mList.clear();
-                CreditCard creditCard = new CreditCard("ALIPAY", "支付宝", "01", "10");
-                int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
-                creditCard.setGracePeriod(maxFreeTime);
-                mList.add(creditCard);
-                creditCard = new CreditCard("CITIC", "中信银行", "02", "21");
-                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
-                creditCard.setGracePeriod(maxFreeTime);
-                mList.add(creditCard);
-                creditCard = new CreditCard("CMB", "招商银行", "25", "13");
-                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
-                creditCard.setGracePeriod(maxFreeTime);
-                mList.add(creditCard);
-                creditCard = new CreditCard("SPABANK", "平安银行", "20", "08");
-                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
-                creditCard.setGracePeriod(maxFreeTime);
-                mList.add(creditCard);
-                creditCard = new CreditCard("SPDB", "上海浦东发展银行", "13", "02");
-                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
-                creditCard.setGracePeriod(maxFreeTime);
-                mList.add(creditCard);
+//                CreditCard creditCard = new CreditCard("ALIPAY", "支付宝", "01", "10");
+//                int maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
+//                creditCard.setGracePeriod(maxFreeTime);
+//                mList.add(creditCard);
+//                creditCard = new CreditCard("CITIC", "中信银行", "02", "21");
+//                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
+//                creditCard.setGracePeriod(maxFreeTime);
+//                mList.add(creditCard);
+//                creditCard = new CreditCard("CMB", "招商银行", "25", "13");
+//                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
+//                creditCard.setGracePeriod(maxFreeTime);
+//                mList.add(creditCard);
+//                creditCard = new CreditCard("SPABANK", "平安银行", "20", "08");
+//                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
+//                creditCard.setGracePeriod(maxFreeTime);
+//                mList.add(creditCard);
+//                creditCard = new CreditCard("SPDB", "上海浦东发展银行", "13", "02");
+//                maxFreeTime = CalculateManager.getInstance().getMaxFreeTime(creditCard.getStatementDate(), creditCard.getPaymentDate());
+//                creditCard.setGracePeriod(maxFreeTime);
+//                mList.add(creditCard);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -186,10 +185,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refrash() {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 creditCardAdapter.notifyDataSetChanged();
+                if (mList.size() <= 0) return;
                 CreditCard max = Collections.max(mList, new Comparator<CreditCard>() {
                     @Override
                     public int compare(CreditCard o1, CreditCard o2) {

@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/activity_main">
+            android:label="@string/max_interest_free_period">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
