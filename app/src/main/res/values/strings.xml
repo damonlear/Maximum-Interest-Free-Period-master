@@ -1,17 +1,26 @@
 <resources>
-    <string name="app_name">免息日</string>
+    <string name="app_name">免息期</string>
 
     <string name="pick_bank">请选择银行</string>
     <string name="pick_bank_t">请选择银行：</string>
     <string name="pick_number">请输入银行卡号</string>
     <string name="pick_number_t">请输入银行卡号：</string>
-    <string name="pick_payment">请选择账单日</string>
-    <string name="pick_payment_t">请选择账单日：</string>
-    <string name="pick_statement">请选择还款日</string>
-    <string name="pick_statement_t">请选择还款日：</string>
-    <string name="payment">账单日</string>
-    <string name="payment_t">账单日：</string>
-    <string name="statement">还款日</string>
-    <string name="statement_t">还款日：</string>
+    <string name="pick_payment">请选择还款日</string>
+    <string name="pick_payment_t">请选择还款日：</string>
+    <string name="pick_statement">请选择账单日</string>
+    <string name="pick_statement_t">请选择账单日：</string>
+    <string name="payment">还款日</string>
+    <string name="payment_t">还款日：</string>
+    <string name="statement">账单日</string>
+    <string name="statement_t">账单日：</string>
+
+    <string name="interest_free_period">免息期</string>
+    <string name="interest_free_period_t">免息期：</string>
+    <string name="max_interest_free_period">最长免息期</string>
+    <string name="max_interest_free_period_t">最长免息期：</string>
+
+    <string name="activity_main">全部银行卡界面</string>
+    <string name="activity_add">添加银行卡界面</string>
+    <string name="activity_video">视频界面</string>
 
 </resources>

@@ -37,11 +37,15 @@ public class AddCardActivity extends AppCompatActivity {
     private TextView tvStatement;
     //临时信用卡对象
     private CreditCard creditCard = new CreditCard();
+    private CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+
+        cardView = findViewById(R.id.card_view);
+        cardView.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         button = findViewById(R.id.button);
         tvStepTitle = findViewById(R.id.tv_step_title);
@@ -53,8 +57,8 @@ public class AddCardActivity extends AppCompatActivity {
 
         mFragments.add(new BankPickerFragment());
         mFragments.add(new BankNumberFragment());
-        mFragments.add(new BankPaymentFragment());
         mFragments.add(new BankStatementFragment());
+        mFragments.add(new BankPaymentFragment());
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, titleArrays, mFragments);
         viewPager2.setAdapter(viewPagerAdapter);
@@ -91,6 +95,7 @@ public class AddCardActivity extends AppCompatActivity {
     }
 
     private void setPager(int position) {
+        setTitle(titleArrays[position]);
         tvStepTitle.setText(titleArrays[position]);
         viewPager2.setCurrentItem(position);
     }
@@ -102,7 +107,7 @@ public class AddCardActivity extends AppCompatActivity {
         TextView tvName = findViewById(R.id.tv_name);
         tvName.setText(name);
 
-        CardView cardView = findViewById(R.id.card_view);
+
         ImageView ivIcon = findViewById(R.id.iv_icon);
         String url = BaseUrl.getBankIconUrl(bank);
         RequestOptions options = new RequestOptions()

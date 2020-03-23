@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_statement_date"
+        android:title="@string/statement" />
+    <item
+        android:id="@+id/menu_interest_free_period"
+        android:title="@string/interest_free_period" />
+    <item
+        android:id="@+id/about"
+        android:title="ABOUT" />
+</menu>

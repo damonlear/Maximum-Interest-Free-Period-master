@@ -2,9 +2,14 @@ package com.damonleexh.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +19,13 @@ import com.damonleexh.Code;
 import com.damonleexh.R;
 import com.damonleexh.base.SpacesItemDecoration;
 import com.damonleexh.bean.CreditCard;
+import com.damonleexh.ui.VideoActivity;
 import com.damonleexh.ui.add.AddCardActivity;
 import com.damonleexh.util.CalculateManager;
 import com.damonleexh.util.FileUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private List<CreditCard> mList = new ArrayList<>();
     private CreditCardAdapter creditCardAdapter;
     private RecyclerView mRecyclerView;
+    private String mFile = "creditCard.json";
 
     //查询信用卡账单
     @Override
@@ -68,6 +74,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        writeFilesTemp(mList);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_statement_date:
+                Intent intent_statement_date = new Intent(this, VideoActivity.class);
+                intent_statement_date.putExtra("uriString" , VideoActivity.statement_date);
+                startActivity(intent_statement_date);
+                break;
+            case R.id.menu_interest_free_period:
+                Intent intent_interest_free_period = new Intent(this, VideoActivity.class);
+                intent_interest_free_period.putExtra("uriString" , VideoActivity.interest_free_period);
+                startActivity(intent_interest_free_period);
+                break;
+            case R.id.about:
+                new AlertDialog.Builder(this)
+                        .setMessage("最大免息日")
+                        .setPositiveButton("确定", null)
+                        .setNegativeButton("取消", null)
+                        .create().show();
+                Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
@@ -75,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == Code.RESULTCODE_PICKER_CARD) {
                     CreditCard creditCard = (CreditCard) data.getSerializableExtra("creditCard");
                     boolean b = addCreditCard(creditCard);
-                    if (b){
+                    if (b) {
                         refrash();
                     }
                 }
@@ -98,11 +144,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        String read = FileUtil.read(this, getApplication().getPackageName());
-        CreditCards creditCards = JSON.parseObject(read, CreditCards.class);
-        if (creditCards != null && creditCards.list != null && creditCards.list.size() > 0) {
+        List<CreditCard> creditCards = readFilesTemp();
+        if (creditCards != null && creditCards.size() > 0) {
             mList.clear();
-            mList.addAll(creditCards.list);
+            mList.addAll(creditCards);
         } else {
             try {
                 mList.clear();
@@ -149,8 +194,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class CreditCards implements Serializable {
-        List<CreditCard> list;
+    private List<CreditCard> readFilesTemp() {
+        String temp = FileUtil.read(this, mFile);
+        return JSON.parseArray(temp, CreditCard.class);
+    }
+
+    private boolean writeFilesTemp(List<CreditCard> list) {
+        String temp = JSON.toJSONString(list);
+        return FileUtil.write(this, mFile, temp);
     }
 }
 
